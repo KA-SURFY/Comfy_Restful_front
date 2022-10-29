@@ -59,20 +59,9 @@ class ManageSurveyService {
         return axios.get(MANAGESURVEY_API_BASE_URL + '/' + status+'/'+memberId,{headers:{withCredentials: true,'Access-Control-Allow-Origin':'*','ACCESS_TOKEN':`${accessToken}`,'REFRESH_TOKEN':`${refreshToken}`}});
     }
 
-    deleteSurvey(surveyId, memberId,accessToken,refreshToken){
-        console.log('[deleteSurvey] - surveyId',surveyId);
-        console.log('[deleteSurvey] - memberId',memberId);
-        console.log('[deleteSurvey] - accessToken',accessToken);
-        console.log('[deleteSurvey] - refreshToken',refreshToken);
-
-        const response=axios.delete(`/deleteSurvey/${surveyId}/${memberId}`,{headers:{withCredentials: true,'Access-Control-Allow-Origin':'*','ACCESS_TOKEN':`${accessToken}`,'REFRESH_TOKEN':`${refreshToken}`}})
-        if(response.data.code===2002){
-            return 100;
-        }
-        else renew_accessToken(response.config.headers.ACCESS_TOKEN);
-
+    deleteSurvey(surveyId){
+        const response=axios.delete(`/deleteSurvey/${surveyId}/${memberId}`);      
         return response;
-        // return axios.delete(MANAGESURVEY_API_BASE_URL + '/' + surveyId + '/' + memberId);
     }
 }
 
