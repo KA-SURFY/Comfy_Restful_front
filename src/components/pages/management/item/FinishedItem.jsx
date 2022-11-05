@@ -11,6 +11,8 @@ function FinishedItem(props) {
     const [finishedList, setFinishedList] = useState([]);
     const [selectSurveyId, setSelectSurveyId] = useState()
     let [isOpen, setIsOpen] = useState(false);
+    let [isFailOpen, setIsFailOpen] = useState(false);
+
 
     function closeModal() {
         setIsOpen(false)
@@ -23,6 +25,18 @@ function FinishedItem(props) {
     function showModal(surveyId) {
         setSelectSurveyId(surveyId)
         openModal();
+    }
+
+    //설문 삭제 실패
+    function closeFailModal() {
+        setIsFailOpen(false);
+        
+        document.location.href = "/manage";
+    }
+
+    function openFailModal() {
+        setIsFailOpen(true);
+        
     }
 
     useEffect(() => {
@@ -43,9 +57,15 @@ function FinishedItem(props) {
 
     function deleteSurvey(surveyId) {
         deleteSelectSurvey(surveyId).then(res => {
-            console.log(res);
-            closeModal();
-            window.location.reload();
+            if(res.data.code === 2022){
+                console.log('게시글 존재 삭제 실패');
+                setIsOpen(false);
+                openFailModal();
+            }
+            else {
+                closeModal();
+                document.location.href = "/manage";
+            }
         })
     }
 
@@ -208,9 +228,67 @@ function FinishedItem(props) {
                                             <button
                                                 type="button"
                                                 className="inline-flex justify-center rounded-md border border-transparent bg-blue-100 px-4 py-2 text-sm font-medium text-blue-900 hover:bg-blue-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-2"
-                                                onClick={() => deleteSurvey(selectSurveyId)}
+                                                onClick={() => {
+                                                    deleteSurvey(selectSurveyId);
+                                                    closeModal();
+                                                }}
                                             >
                                                 설문을 삭제할래요.
+                                            </button>
+                                        </div>
+                                    </Dialog.Panel>
+                                </Transition.Child>
+                            </div>
+                        </div>
+                    </Dialog>
+                </Transition>
+
+                {/* 삭제실패 */}
+                <Transition appear show={isFailOpen} as={Fragment}>
+                    <Dialog as="div" className="relative z-10" onClose={closeFailModal}>
+                        <Transition.Child
+                            as={Fragment}
+                            enter="ease-out duration-300"
+                            enterFrom="opacity-0"
+                            enterTo="opacity-100"
+                            leave="ease-in duration-200"
+                            leaveFrom="opacity-100"
+                            leaveTo="opacity-0"
+                        >
+                            <div className="fixed inset-0 bg-black bg-opacity-25" />
+                        </Transition.Child>
+
+                        <div className="fixed inset-0 overflow-y-auto">
+                            <div className="flex min-h-full items-center justify-center p-4 text-center">
+                                <Transition.Child
+                                    as={Fragment}
+                                    enter="ease-out duration-300"
+                                    enterFrom="opacity-0 scale-95"
+                                    enterTo="opacity-100 scale-100"
+                                    leave="ease-in duration-200"
+                                    leaveFrom="opacity-100 scale-100"
+                                    leaveTo="opacity-0 scale-95"
+                                >
+                                    <Dialog.Panel className="w-full max-w-md transform overflow-hidden rounded-2xl bg-white p-6 text-left align-middle shadow-xl transition-all">
+                                        <Dialog.Title
+                                            as="h3"
+                                            className="text-lg font-medium leading-6 text-gray-900"
+                                        >
+                                            설문 삭제 불가
+                                        </Dialog.Title>
+                                        <div className="mt-2">
+                                            <p className="text-sm text-gray-500">
+                                                해당 설문지로 만든 게시글이 있어요. 설문지 삭제에 실패했어요.
+                                            </p>
+                                        </div>
+
+                                        <div className="mt-4">
+                                            <button
+                                                type="button"
+                                                className="inline-flex justify-center rounded-md border border-transparent bg-blue-100 px-4 py-2 text-sm font-medium text-blue-900 hover:bg-blue-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-2"
+                                                onClick={closeFailModal}
+                                            >
+                                                알겠습니다.
                                             </button>
                                         </div>
                                     </Dialog.Panel>
