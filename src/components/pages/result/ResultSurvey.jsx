@@ -45,15 +45,16 @@ const ResultSurvey = () => {
         <h2 className="mb-4 text-2xl font-bold tracking-tight text-gray-900"> 한눈에 보는 결과</h2>
 
         <div className="mb-4 grid grid-cols-1 gap-y-10 text-center gap-x-6 sm:grid-cols-2 lg:grid-cols-3 xl:gap-x-8">
-          <div className="border py-14 flex-column" >
+          <div className="rounded-md border py-14 flex-column" >
           <h3 className="m-2 text-dark text-2xl font-weight-bold">{surveyId} 번 설문지입니다.</h3>
             <h2 className="m-2 text-xl font-weight-bold text-dark">설문 제목: {survey.title}</h2>
             <h2 className="m-2 text-xl font-weight-bold text-dark">설문 내용: {survey.contents}</h2>
           </div>
 
-          <div className="p-4 d-flex border flex-column lg:h-96">
+          <div className="p-4 rounded-md d-flex border flex-column lg:h-96 ">
             <h3 className="m-2 text-2xl font-weight-bold">응답자 수</h3>
             <ResponsivePie
+              
               data={[
                 {
                   id: '응답자', //필수항목 답변 개수
@@ -90,7 +91,7 @@ const ResultSurvey = () => {
             />
           </div>
 
-          <div className="grid border items-center grid-cols-1 gap-x-6 sm:grid-cols-1 xl:gap-x-8">
+          <div className="grid rounded-md border items-center grid-cols-1 gap-x-6 sm:grid-cols-1 xl:gap-x-8">
 
             <div className="p-2 d-flex flex-column ">
               <h2 className="m-2 text-2xl font-weight-bold text-dark w-100 h-100">만족도</h2>

@@ -7,7 +7,6 @@ const SURVEY_SHARE_URL = "http://localhost:3000"
 class SurveyService {
 
     saveSurvey(loc,memberid, data){
-        console.log(`${SURVEY_API_BASE_URL}${loc}/${memberid}`)
         return axios.post(`${SURVEY_API_BASE_URL}${loc}/${memberid}`, data); //editSurvey/1/a@gmail.com //createSurvey/a@gmail.com
     }
     shareSurvey(surveyId){

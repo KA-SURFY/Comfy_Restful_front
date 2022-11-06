@@ -43,7 +43,7 @@ export async function deleteSurvey(surveyId){
 export async function updateSurveyStatus(surveyId){
     const memberId=localStorage.getItem('memberId');
 
-    const response=await axios.patch(`http://localhost:8080/survey-status/${surveyId}`,{},{headers:{withCredentials: true,'Access-Control-Allow-Origin':'*','ACCESS_TOKEN':`${accessToken}`,'REFRESH_TOKEN':`${refreshToken}`}});
+    const response=await axios.patch(`http://localhost:8080/survey/${surveyId}`,{},{headers:{withCredentials: true,'Access-Control-Allow-Origin':'*','ACCESS_TOKEN':`${accessToken}`,'REFRESH_TOKEN':`${refreshToken}`}});
     console.log('updateSurveyStatus response: ',response);
 
     return response.data.result;
@@ -53,7 +53,7 @@ export async function updateSurveyStatus(surveyId){
 export async function makeSurveyFromPost(surveyId){
     console.log('makeSurveyFromPost - surveyId',surveyId);
     
-    const response=await axios.post(`http://localhost:8080/bookmark/${surveyId}/${localStorage.getItem('memberId')}`,{},{headers:{withCredentials: true,'Access-Control-Allow-Origin':'*','ACCESS_TOKEN':`${accessToken}`,'REFRESH_TOKEN':`${refreshToken}`}});
+    const response=await axios.post(`http://localhost:8080/created-survey/${surveyId}/${localStorage.getItem('memberId')}`,{},{headers:{withCredentials: true,'Access-Control-Allow-Origin':'*','ACCESS_TOKEN':`${accessToken}`,'REFRESH_TOKEN':`${refreshToken}`}});
         
     
     // if(response.data.code===2002){
@@ -92,7 +92,5 @@ export async function getSurveyInfo(surveyId){
 // 설문지 썸네일 저장
 export function postSurveyThumbnail(surveyId){
     const thumbNum = Math.floor(Math.random() * 5 + 1);
-    const response=axios.patch(`http://localhost:8080/survey/thumbnail/${surveyId}/${thumbNum}`,{},{headers:config});
-
+    const response=axios.patch(`http://localhost:8080/survey/thumbnail/${surveyId}/${thumbNum}`,{},{headers:config})
 }
-

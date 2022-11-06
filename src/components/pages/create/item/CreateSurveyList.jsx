@@ -20,13 +20,13 @@ export function Ques_data_list(){
         {
             "id":1,
             "name":"객관식",
-            "choice_type":0,
+            "choice_type":false,
             "choice_value":[]
         },
         {
             "id":2,
             "name":"객관식 Grid",
-            "choice_type":0,
+            "choice_type":false,
             "choice_value":[]
         },
         {
@@ -37,12 +37,7 @@ export function Ques_data_list(){
         {
             "id":4,
             "name":"슬라이더",
-            "answer":0,
-        },
-        {
-            "id":5,
-            "name":"파일 업로드",
-            "file_list":[],
+            "answer":"",
         }
     ]
 }
@@ -163,39 +158,39 @@ export function ItemList(props){
                     {
                         drop_prov => (
                             <div className={style.width_full} {...drop_prov.droppableProps} ref={drop_prov.innerRef}>
-            {
-                statelist.map(state => {
-                    if(props.mode===1){
-                        return (
+                                {
+                                    statelist.map(state => {
+                                        if(props.mode===1){
+                                            return (
                                                 <Draggable draggableId={String(state.id)} index={state.id} key={key+state.id}>
                                                     {
                                                         drag_prov => (
-                            <SurveyEdit
-                                key={key+state.id}
-                                rootid={que ? state.id:props.rootid}
-                                id={state.id}
-                                type={props.type}
+                                                            <SurveyEdit
+                                                                key={key+state.id}
+                                                                rootid={que ? state.id:props.rootid}
+                                                                id={state.id}
+                                                                type={props.type}
                                                                 drag_prov={drag_prov}
-                            />
+                                                            />
                                                         )
                                                     }
                                                 </Draggable>
-                                                
-                        );
-                    }
-                    else{
-                        return (
-                                <LoadItem
-                                    key={key+state.id}
-                                    rootid={que ? state.id:props.rootid}
-                                    id={state.id}
-                                    type={props.type}
-                                    mode={props.mode}
-                                />
-                        );
-                    }
-                })
-            }
+                                            );
+                                            }
+                                        else{
+                                            return (
+                                                    <LoadItem
+                                                        key={key+state.id}
+                                                        rootid={que ? state.id:props.rootid}
+                                                        ansid={props.ansid}
+                                                        id={state.id}
+                                                        type={props.type}
+                                                        mode={props.mode}
+                                                    />
+                                                );
+                                            }
+                                        })
+                                    }
                                 {drop_prov.placeholder}
                             </div>
                         )

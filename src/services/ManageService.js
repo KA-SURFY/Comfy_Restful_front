@@ -1,6 +1,6 @@
 import axios from 'axios';
 import { renew_accessToken,initialize } from '../modules/member';
-const MANAGESURVEY_API_BASE_URL = "http://localhost:8080/surveyPage";
+const MANAGESURVEY_API_BASE_URL = "http://localhost:8080";
 
 const accessToken=localStorage.getItem('accessToken');
 const memberId=localStorage.getItem('memberId');
@@ -8,7 +8,7 @@ const refreshToken=localStorage.getItem('refreshToken');
 class ManageSurveyService {
     
     getSurveys(){
-        const response=axios.get(MANAGESURVEY_API_BASE_URL,{headers:{withCredentials: true,'Access-Control-Allow-Origin':'*','ACCESS_TOKEN':`${accessToken}`,'REFRESH_TOKEN':`${refreshToken}`}});
+        const response=axios.get(MANAGESURVEY_API_BASE_URL+"/surveyPage",{headers:{withCredentials: true,'Access-Control-Allow-Origin':'*','ACCESS_TOKEN':`${accessToken}`,'REFRESH_TOKEN':`${refreshToken}`}});
         if(response.data.code===2002){
             return 100;
         }
@@ -34,7 +34,7 @@ class ManageSurveyService {
     }
 
     updateSurvey2(surveyId){
-        const response=axios.patch(MANAGESURVEY_API_BASE_URL + '/' + surveyId,{headers:{withCredentials: true,'Access-Control-Allow-Origin':'*','ACCESS_TOKEN':`${accessToken}`,'REFRESH_TOKEN':`${refreshToken}`}});
+        const response=axios.patch(MANAGESURVEY_API_BASE_URL+"/surveyPage" + '/' + surveyId,{headers:{withCredentials: true,'Access-Control-Allow-Origin':'*','ACCESS_TOKEN':`${accessToken}`,'REFRESH_TOKEN':`${refreshToken}`}});
         // if(response.data.code===2002){
         //     return 100;
         // }
@@ -56,11 +56,12 @@ class ManageSurveyService {
     }
 
     getSurveyByStatus(status){
-        return axios.get(MANAGESURVEY_API_BASE_URL + '/' + status+'/'+memberId,{headers:{withCredentials: true,'Access-Control-Allow-Origin':'*','ACCESS_TOKEN':`${accessToken}`,'REFRESH_TOKEN':`${refreshToken}`}});
+        return axios.get(MANAGESURVEY_API_BASE_URL+"/surveyPage" + '/' + status+'/'+memberId,{headers:{withCredentials: true,'Access-Control-Allow-Origin':'*','ACCESS_TOKEN':`${accessToken}`,'REFRESH_TOKEN':`${refreshToken}`}});
     }
 
     deleteSurvey(surveyId){
-        const response=axios.delete(`/deleteSurvey/${surveyId}/${memberId}`);      
+        console.log("delete")
+        const response=axios.delete(`${MANAGESURVEY_API_BASE_URL}/deleteSurvey/${surveyId}/${memberId}`);      
         return response;
     }
 }
