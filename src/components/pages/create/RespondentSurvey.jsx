@@ -18,7 +18,15 @@ export default function RespondentSurvey(props){
         CreateSurveyService.loadSurvey(loc,"").then(response=>{ //answerSurvey/surveyid/submitid
             console.log(response)
             if(response.data.result.status==="finish"){
-                navigate('/respondentclose')
+                if(props.mode===3){
+                    dispatch({
+                        type:"loadfromserver",
+                        value:response.data.result
+                    })
+                }
+                else{
+                    navigate('/respondentclose')
+                }
             }
             else if(response.data.result.status==="surveying"){
                 const start=response.data.result.start.substr(0,10)
