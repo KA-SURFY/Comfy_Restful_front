@@ -214,9 +214,17 @@ function QuestionListItem(props) {
             for (var i = 0; i < answer_count; i++) {
                 sum = sum + question.answer[i].satisfaction.percent;
             }
-            array.push(<div className='mb-2 text-xl'>{sum / answer_count}</div>)
+            array.push(<div className='mb-2 text-xl'>{parseFloat(sum / answer_count).toFixed(0)}</div>)
             return array;
-        } else { // 주관식
+        } else if (type === "슬라이더") {
+            let sum = 0;
+            for (var i = 0; i < answer_count; i++) {
+                sum = sum + question.answer[i].slider.value;
+            }
+            array.push(<div className='mb-2 text-xl'>{parseFloat(sum / answer_count).toFixed(2)}</div>)
+            return array;
+        }
+        else { // 주관식
             for (var i = 0; i < answer_count; i++) {
                 array.push(<div className='mb-2 text-xl'>{question.answer[i].essay.contents}</div>)
             }

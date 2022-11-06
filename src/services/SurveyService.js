@@ -94,4 +94,3 @@ export function postSurveyThumbnail(surveyId){
     const thumbNum = Math.floor(Math.random() * 5 + 1);
     const response=axios.patch(`http://localhost:8080/survey/thumbnail/${surveyId}/${thumbNum}`,{},{headers:config})
 }
-

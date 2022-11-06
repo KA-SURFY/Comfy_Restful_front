@@ -3,7 +3,6 @@ import post from './post';
 import member from './member';
 import result from './result';
 import createsurvey from './createsurvey';
-import resultSlice from './resultSlice.js';
 
 
 const rootReducer=combineReducers({
@@ -11,7 +10,6 @@ const rootReducer=combineReducers({
     member,
     result,
     createsurvey,
-    result,
 });
 
 export default rootReducer;
