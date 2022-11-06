@@ -43,7 +43,7 @@ function App() {
             
                 <Routes>
                       <Route path="respondent/:surveyId" element={<RespondentSurvey mode={2}/>} />
-                      <Route path="answersurvey/:surveyId/:submitId" element={<RespondentSurvey mode={3}/>} />
+                      <Route path="respondent/answer/:surveyId/:submitId" element={<RespondentSurvey mode={3}/>} />
                       <Route path="respondentcomplete" element={<RespondentComplete />} />
                       <Route path="respondentclose" element={<RespondentClose />} />
                       <Route path="respondentnotopen" element={<RespondentNotOpen />} />
@@ -60,10 +60,7 @@ function App() {
                       <Route path="surveyshared" element={<SurveyShared />} />
                       <Route path="/resultSurvey/:surveyId" element={<ResultSurvey />}/>
                       <Route path="/createsurvey" element={<CreateSurvey/>} />
-                      <Route path="/createsurvey/:surveyId" element={<CreateSurvey load={"yes"}/>} />
-                      <Route path="/respondentSurvey/:surveyId" element={<RespondentSurvey mode={2}/>} />
-                      <Route path="/answerSurvey/:surveyId/:submitId" element={<RespondentSurvey mode={3}/>} />
-                      <Route path="/respondentComplete" element={<RespondentComplete />} />
+                      <Route path="/createsurvey/:surveyId" element={<CreateSurvey load={"yes"}/>}/>
                       {/* 상단에 위치하는 라우트들의 규칙을 모두 확인, 일치하는 라우트가 없는경우 처리 */}
                       <Route path="*" element={<NotFound />}></Route>
                   </Routes>

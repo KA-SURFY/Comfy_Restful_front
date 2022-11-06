@@ -18,7 +18,7 @@ const IndividualShow = () => {
             {respondent && <IndividualList
                 answers={respondent}
                 onClickItem={(item) => {
-                    navigate(`/answerSurvey/${surveyId}/${item.id}`);
+                    navigate(`/respondent/answer/${surveyId}/${item.id}`);
                 }} />}
         </div>
     )

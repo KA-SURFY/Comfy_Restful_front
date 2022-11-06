@@ -67,11 +67,13 @@ export function LoadItem(props){
             break
         case "ans":
             var value=Loadansitem(rootid,id)
-            var answer=Loadcheckedvalue(rootid,rootid,id)
             var typename="A."
             var checked_id=props.id
             if(cho){
                 ans=false
+            }
+            else{
+                var answer=Loadcheckedvalue(rootid,rootid,id)
             }
             break;
         case "cho":
@@ -90,7 +92,6 @@ export function LoadItem(props){
             ans_style=style.column_container_cho
         }
     }
-    
     return (
         <div className={ans_style}
             onClick={()=>{

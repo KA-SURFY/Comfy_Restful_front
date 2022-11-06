@@ -44,24 +44,25 @@ const ResultSurvey = () => {
       <div className="mx-auto max-w-2xl py-16 px-4 sm:py-6 sm:px-6 lg:max-w-7xl lg:px-8">
         <h2 className="mb-4 text-2xl font-bold tracking-tight text-gray-900"> 한눈에 보는 결과</h2>
 
-        <div className="mb-4 grid grid-cols-1 gap-y-10 text-center gap-x-6 sm:grid-cols-2 lg:grid-cols-3 xl:gap-x-8">
-          <div className="rounded-md border py-14 flex-column" >
+        <div className="min-w-max mb-4 grid grid-cols-1 gap-y-10 text-center gap-x-6 sm:grid-cols-2 lg:grid-cols-3 xl:gap-x-8">
+          <div className="min-w-max rounded-md border py-14 flex-column" >
           <h3 className="m-2 text-dark text-2xl font-weight-bold">{surveyId} 번 설문지입니다.</h3>
             <h2 className="m-2 text-xl font-weight-bold text-dark">설문 제목: {survey.title}</h2>
             <h2 className="m-2 text-xl font-weight-bold text-dark">설문 내용: {survey.contents}</h2>
           </div>
 
-          <div className="p-4 rounded-md d-flex border flex-column lg:h-96 ">
+          <div className="p-4 min-w-max rounded-md d-flex border flex-column">
             <h3 className="m-2 text-2xl font-weight-bold">응답자 수</h3>
             <ResponsivePie
-              
+              width = {330}
+              height = {350}
               data={[
                 {
                   id: '응답자', //필수항목 답변 개수
                   value: respondent.length
                 }
               ]}
-              margin={{ top: 20,bottom: 100}}
+              margin={{ top: 20,bottom: 50}}
               innerRadius={0.5}
               padAngle={1.8}
               cornerRadius={0}
@@ -91,7 +92,7 @@ const ResultSurvey = () => {
             />
           </div>
 
-          <div className="grid rounded-md border items-center grid-cols-1 gap-x-6 sm:grid-cols-1 xl:gap-x-8">
+          <div className="min-w-max grid rounded-md border items-center grid-cols-1 gap-x-6 sm:grid-cols-1 xl:gap-x-8">
 
             <div className="p-2 d-flex flex-column ">
               <h2 className="m-2 text-2xl font-weight-bold text-dark w-100 h-100">만족도</h2>
