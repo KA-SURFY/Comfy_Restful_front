@@ -20,13 +20,13 @@ export function Ques_data_list(){
         {
             "id":1,
             "name":"객관식",
-            "choice_type":0,
+            "choice_type":false,
             "choice_value":[]
         },
         {
             "id":2,
             "name":"객관식 Grid",
-            "choice_type":0,
+            "choice_type":false,
             "choice_value":[]
         },
         {
@@ -37,13 +37,8 @@ export function Ques_data_list(){
         {
             "id":4,
             "name":"슬라이더",
-            "answer":0,
+            "answer":"",
         },
-        {
-            "id":5,
-            "name":"파일 업로드",
-            "file_list":[],
-        }
     ]
 }
 

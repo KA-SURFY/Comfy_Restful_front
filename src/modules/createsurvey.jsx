@@ -18,7 +18,7 @@ function init_survey(){
         "ques_list":[],
         "ans_list":[],
         "choice_list":[],
-        "satis":0,
+        "satis":"",
         "intro0":"",
         "intro1":"",
     }
@@ -91,8 +91,6 @@ export default function createsurvey(state=init_survey(), action){
             state={
                 ...state,
                 "serverload":true,
-                "endtime":"",
-                "starttime":"",
                 "share_modal":false,
             }
             break

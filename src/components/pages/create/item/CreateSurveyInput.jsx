@@ -77,7 +77,7 @@ export function CreateSurveySlider(props){
         className={style.slider_ani}
         type="range"
         min={0}
-        max={100}
+        max={props.max || 100}
         value={props.ans || 0}
         onChange={({ 
             target: { value: radius } }) => {

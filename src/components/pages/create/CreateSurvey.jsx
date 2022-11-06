@@ -269,6 +269,7 @@ function CreateSurveySend() {
             <CreateSurveyButton
                 title="임시저장"
                 onClick={()=>{
+                    console.log(state)
                     state["endtime"]="not"
                     setDisabled(true)
                     CreateSurveyService.saveSurvey(loc,memberid,state).then(response=>{

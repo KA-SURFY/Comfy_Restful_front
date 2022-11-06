@@ -132,12 +132,7 @@ export function SurveySlider(props){
         type="edit_writing"
         var ans=Getans(data.id)
     }
-    if(data.mode===3){
-        var slider_style=style.text
-    }
-    else{
-        var slider_style=style.slider_text
-    }
+    var slider_style=style.slider_text
 
     return <div className={style.row_container}>
         {
@@ -151,6 +146,7 @@ export function SurveySlider(props){
                 mode={data.mode}
                 type={type}
                 id={data.id}
+                max={props.type==="edit_satis"?null:5}
             />
         }
         {
