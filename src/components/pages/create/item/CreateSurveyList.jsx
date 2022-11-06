@@ -38,7 +38,7 @@ export function Ques_data_list(){
             "id":4,
             "name":"슬라이더",
             "answer":"",
-        }
+        },
     ]
 }
 
