@@ -94,7 +94,11 @@ export function LoadItem(props){
     return (
         <div className={ans_style}
             onClick={()=>{
+                console.log(id)
                 if(props.mode===2 && !que && ans){
+                    console.log(value)
+                    console.log(props.ansid)
+                    console.log(id)
                     dispatch({
                         type:"choice_checked",
                         id:id,

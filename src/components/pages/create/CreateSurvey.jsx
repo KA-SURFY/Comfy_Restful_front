@@ -218,7 +218,7 @@ function Share_modal() {
                                                 value:false
                                             })
                                             if(share){
-                                                navigate('/')
+                                                navigate('/manage')
                                             }
                                         }}
                                     >
