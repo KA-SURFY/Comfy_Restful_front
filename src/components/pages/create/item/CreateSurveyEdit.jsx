@@ -172,6 +172,12 @@ export function SurveyEdit(props){
                         }}
                     />
                 }
+                {
+                    !que && <p className={style.text_name}
+                        {...drag_prov.dragHandleProps}>
+                        ≡
+                    </p>
+                }
             </div>
             {que && <Ques_tem_list temid={temid || 0} rootid={rootid} id={id} mode={1}/>} 
         </div>

@@ -119,59 +119,59 @@ export function ItemList(props){
         case "ques":
             var statelist=Loadquesitem()
             var key="Q"
+            var z_index="z-10"
             que=true
             break
         case "ans":
             var statelist=Loadansitem(props.rootid)
             var key="A"
+            var z_index="z-10"
             break
         case "cho":
             var statelist=Loadchoitem(props.rootid)
             var key="C"
+            var z_index="z-10"
             break
     }
 
     const onDragEnd = (res) => {
-        console.log(res)
         const sourceid = res.source.index;
         const destid = res.destination.index;
         
         dispatch({
             type:"change_list",
             list_type:props.type,
-            source:statelist.filter(t=>t.id===sourceid)[0],
-            dest:statelist.filter(t=>t.id===destid)[0],
-            source_id:sourceid,
-            dest_id:destid,
+            source:statelist[sourceid],
+            dest:statelist[destid],
+            source_index:sourceid,
+            dest_index:destid,
             rootid:props.rootid
         })
     }
-    
-    const onDragStart = (res)=>{
-        console.log(res)
-    }
-
     return (
         <div className={style.column_container}>
-            <DragDropContext onDragEnd={onDragEnd} onDragStart={onDragStart}>
+            <DragDropContext onDragEnd={onDragEnd}>
                 <Droppable droppableId="item">
                     {
                         drop_prov => (
                             <div className={style.width_full} {...drop_prov.droppableProps} ref={drop_prov.innerRef}>
                                 {
-                                    statelist.map(state => {
+                                    statelist.map((state,idx) => {
                                         if(props.mode===1){
                                             return (
-                                                <Draggable draggableId={String(state.id)} index={state.id} key={key+state.id}>
+                                                <Draggable draggableId={String(state.id)} index={idx} key={key+state.id}>
                                                     {
                                                         drag_prov => (
-                                                            <SurveyEdit
-                                                                key={key+state.id}
-                                                                rootid={que ? state.id:props.rootid}
-                                                                id={state.id}
-                                                                type={props.type}
-                                                                drag_prov={drag_prov}
-                                                            />
+                                                            <div className={z_index}>
+                                                                <SurveyEdit
+                                                                    key={key+state.id}
+                                                                    rootid={que ? state.id:props.rootid}
+                                                                    id={state.id}
+                                                                    type={props.type}
+                                                                    drag_prov={drag_prov}
+                                                                />
+                                                            </div>
+                                                            
                                                         )
                                                     }
                                                 </Draggable>

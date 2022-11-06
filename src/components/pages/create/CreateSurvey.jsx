@@ -65,8 +65,8 @@ export function CreateSurvey(props){  //createSurvey/a@gmail.com
                         }}
                     />
                     <p className={!display ? `text-gray-200` : `text-blue-600`}>&nbsp;미리보기</p>
-            </div>
-    }
+                </div>
+            }
             <div className={style.page}>
                 {
                     (width>=height*1.2 || !display) && <div className={style.column_body}>
@@ -83,7 +83,7 @@ export function CreateSurvey(props){  //createSurvey/a@gmail.com
                             state={queslist}
                         />
                     </div>
-}
+                }
                 {
                     width>=height*1.2 && 
                     <hr style={{ border: "1px solid #B0B0B0", width: '1', height: '100vh'}} />

@@ -25,12 +25,12 @@ function init_survey(){
 }
 
 function Gen_id(state){
-    if(state.length!==0){
-        var id=state[state.length-1].id+1
-    }
-    else{
-        var id=0
-    }
+    var id=0
+    state.map(st=>{
+        if(st.id>=id){
+            id=st.id+1
+        }
+    })
     return id
 }
 
@@ -40,48 +40,40 @@ export default function createsurvey(state=init_survey(), action){
         case "change_list":
             switch(action.list_type){
                 case "ques":
-                    var dest_index=state.ques_list.findIndex(t=>t.id===action.dest_id)
-                    var source_index=state.ques_list.findIndex(t=>t.id===action.source_id)
-                    state.ques_list[dest_index]=action.source
-                    state.ques_list[source_index]=action.dest
-                    state.ques_list[dest_index].id=action.dest_id
-                    state.ques_list[source_index].id=action.source_id
-                    if(state.ans_list){
-                        state.ans_list.map(ans=>{
-                            if(ans.rootid===action.source_id){
-                                ans.rootid=action.dest_id
-                            }
-                            else if(ans.rootid===action.dest_id){
-                                ans.rootid=action.source_id
-                            }
-                        })
+                    var dest_id=action.dest.id
+                    var source_id=action.source.id
+                    state.ques_list=state.ques_list.filter(t=>t.id!==source_id)
+                    var dest_index=state.ques_list.findIndex(t=>t.id===dest_id)
+                    if(action.source_index>action.dest_index){
+                        state.ques_list.splice(dest_index,0,action.source)
                     }
-                    if(state.choice_list){
-                        state.choice_list.map(cho=>{
-                            if(cho.rootid===action.source_id){
-                                cho.rootid=action.dest_id
-                            }
-                            else if(cho.rootid===action.dest_id){
-                                cho.rootid=action.source_id
-                            }
-                        })
+                    else{
+                        state.ques_list.splice(dest_index+1,0,action.source)
                     }
                     break
                 case "ans":
-                    var dest_index=state.ans_list.findIndex(t=>t.id===action.dest_id)
-                    var source_index=state.ans_list.findIndex(t=>t.id===action.source_id)
-                    state.ans_list[dest_index]=action.source
-                    state.ans_list[source_index]=action.dest
-                    state.ans_list[dest_index].id=action.dest_id
-                    state.ans_list[source_index].id=action.source_id
+                    var dest_id=action.dest.id
+                    var source_id=action.source.id
+                    state.ans_list=state.ans_list.filter(t=>t.id!==source_id)
+                    var dest_index=state.ans_list.findIndex(t=>t.id===dest_id)
+                    if(action.source_index>action.dest_index){
+                        state.ans_list.splice(dest_index,0,action.source)
+                    }
+                    else{
+                        state.ans_list.splice(dest_index+1,0,action.source)
+                    }
                     break
                 case "cho":
-                    var dest_index=state.choice_list.findIndex(t=>t.id===action.dest_id)
-                    var source_index=state.choice_list.findIndex(t=>t.id===action.source_id)
-                    state.choice_list[dest_index]=action.source
-                    state.choice_list[source_index]=action.dest
-                    state.choice_list[dest_index].id=action.dest_id
-                    state.choice_list[source_index].id=action.source_id
+                    var dest_id=action.dest.id
+                    var source_id=action.source.id
+                    state.choice_list=state.choice_list.filter(t=>t.id!==source_id)
+                    var dest_index=state.choice_list.findIndex(t=>t.id===dest_id)
+                    if(action.source_index>action.dest_index){
+                        state.choice_list.splice(dest_index,0,action.source)
+                    }
+                    else{
+                        state.choice_list.splice(dest_index+1,0,action.source)
+                    }
                     break
             }
             break
