@@ -43,7 +43,7 @@ export async function deleteSurvey(surveyId){
 export async function updateSurveyStatus(surveyId){
     const memberId=localStorage.getItem('memberId');
 
-    const response=await axios.patch(`http://localhost:8080/survey-status/${surveyId}`,{},{headers:{withCredentials: true,'Access-Control-Allow-Origin':'*','ACCESS_TOKEN':`${accessToken}`,'REFRESH_TOKEN':`${refreshToken}`}});
+    const response=await axios.patch(`http://localhost:8080/survey/${surveyId}`,{},{headers:{withCredentials: true,'Access-Control-Allow-Origin':'*','ACCESS_TOKEN':`${accessToken}`,'REFRESH_TOKEN':`${refreshToken}`}});
     console.log('updateSurveyStatus response: ',response);
 
     return response.data.result;
