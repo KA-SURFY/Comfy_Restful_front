@@ -99,7 +99,7 @@ export default function createsurvey(state=init_survey(), action){
             else{
                 var rootid=action.ansid
             }
-            if(state["ques_list"].filter(t=>t.id===action.rootid)[0]["type"]["choice_type"]===0){
+            if(state["ques_list"].filter(t=>t.id===action.rootid)[0]["type"]["choice_type"]===false){
                 if(state["ques_list"].filter(t=>t.id===action.rootid)[0]["type"]["choice_value"].filter(t=>t.rootid===rootid).length===0){
                     var cho_id=Gen_id(state["ques_list"].filter(t=>t.id===action.rootid)[0]["type"]["choice_value"])
                     state["ques_list"].filter(t=>t.id===action.rootid)[0]["type"]["choice_value"]=state["ques_list"].filter(t=>t.id===action.rootid)[0]["type"]["choice_value"].concat(Ans_data_list({selectid:action.value, rootid:rootid, id:cho_id})[1])

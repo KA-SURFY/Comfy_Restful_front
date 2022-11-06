@@ -42,6 +42,7 @@ function App() {
         <BrowserRouter>
             
                 <Routes>
+                      <Route path="/manage/survey/:surveyId" element={<RespondentSurvey mode={0}/>} />
                       <Route path="respondent/:surveyId" element={<RespondentSurvey mode={2}/>} />
                       <Route path="respondent/answer/:surveyId/:submitId" element={<RespondentSurvey mode={3}/>} />
                       <Route path="respondentcomplete" element={<RespondentComplete />} />

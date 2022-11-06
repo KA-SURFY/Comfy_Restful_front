@@ -3,10 +3,11 @@ import { useState, Fragment } from 'react'
 import { useNavigate } from 'react-router-dom';
 import ManageService from '../../../../services/ManageService';
 import { Dialog, Menu, Transition } from '@headlessui/react'
-import { ChevronDownIcon, ForwardIcon, TrashIcon } from '@heroicons/react/20/solid'
+import { ChevronDownIcon, ClipboardDocumentIcon, ForwardIcon, TrashIcon } from '@heroicons/react/20/solid'
+import { useDispatch } from 'react-redux';
 
 function FinishedItem(props) {
-
+    const dispatch = useDispatch();
     const navigate = useNavigate();
     const [finishedList, setFinishedList] = useState([]);
     const [selectSurveyId, setSelectSurveyId] = useState()
@@ -122,7 +123,33 @@ function FinishedItem(props) {
                                             >
                                                 <Menu.Items className="absolute right-0 bottom-8 mt-2 w-36 origin-top-right divide-y divide-gray-100 rounded-md bg-white shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none">
                                                     <div className="px-1 py-1">
-
+                                                        <Menu.Item>
+                                                            {({ active }) => (
+                                                                <button
+                                                                    className={`${active ? 'bg-violet-500 text-white' : 'text-gray-900'
+                                                                        } group flex w-full items-center rounded-md px-2 py-2 text-sm`}
+                                                                    onClick={() => {
+                                                                        dispatch({
+                                                                            type:"reset_template"
+                                                                        })
+                                                                        navigate(`/manage/survey/${survey.surveyId}`)
+                                                                    }}
+                                                                >
+                                                                    {active ? (
+                                                                        <ClipboardDocumentIcon
+                                                                            className="mr-2 h-5 w-5"
+                                                                            aria-hidden="true"
+                                                                        />
+                                                                    ) : (
+                                                                        <ClipboardDocumentIcon
+                                                                            className="mr-2 h-5 w-5"
+                                                                            aria-hidden="true"
+                                                                        />
+                                                                    )}
+                                                                    설문지 보기
+                                                                </button>
+                                                            )}
+                                                        </Menu.Item>
                                                         <Menu.Item>
                                                             {({ active }) => (
                                                                 <button

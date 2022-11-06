@@ -15,10 +15,10 @@ export default function RespondentSurvey(props){
     const loc=useLocation().pathname;
     const navigate=useNavigate()
     if(!state.serverload){
-        CreateSurveyService.loadSurvey(loc,"").then(response=>{ //answerSurvey/surveyid/submitid
+        CreateSurveyService.loadSurvey(loc,"").then(response=>{ //respondent/survey/surveyid/submitid
             console.log(response)
             if(response.data.result.status==="finish"){
-                if(props.mode===3){
+                if(props.mode===3 || props.mode===0){
                     dispatch({
                         type:"loadfromserver",
                         value:response.data.result
@@ -32,14 +32,15 @@ export default function RespondentSurvey(props){
                 const start=response.data.result.start.substr(0,10)
                 const startdate=new Date(start);
                 const today=new Date();
-                if(startdate.getTime>today){
-                    navigate('/respondentnotopen')
-                }
-                else{
+                console.log(start)
+                if(startdate.getTime<=today.getTime || props.mode===0){
                     dispatch({
                         type:"loadfromserver",
                         value:response.data.result
                     })
+                }
+                else{
+                    navigate('/respondentnotopen')
                 }
             }
         });
@@ -59,7 +60,7 @@ export default function RespondentSurvey(props){
                 />
                 <Satisfaction mode={props.mode}/>
                 {
-                    props.mode!==3 && <div className={style.row_container}>
+                    props.mode!==3 && props.mode!==0 && <div className={style.row_container}>
                         <CreateSurveyButton
                             className={style.button}
                             title={"완료"}

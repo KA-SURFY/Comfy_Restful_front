@@ -20,6 +20,9 @@ class SurveyService {
         if(loc==="/survey"){
             var value=value+"/"+memberid
         }
+        else if(loc.substring(0,7)==="/manage"){
+            var value=loc.substring(7,loc.length)+"/"+memberid
+        }
         console.log(SURVEY_API_BASE_URL+`${value}`)
         return axios.get(SURVEY_API_BASE_URL+`${value}`)
     }
