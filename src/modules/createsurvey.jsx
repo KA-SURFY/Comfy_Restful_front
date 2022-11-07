@@ -152,27 +152,8 @@ export default function createsurvey(state=init_survey(), action){
             break
         case "change_ques_type": //제작자 질문유형 변경
             state["ques_list"].filter(t=>t.id===action.rootid)[0]["type"]=Ques_data_list()[action.temid]
-
             state["ans_list"]=state["ans_list"].filter(t=>t.rootid!==action.rootid)
             state["choice_list"]=state["choice_list"].filter(t=>t.rootid!==action.rootid)
-            switch(action.temid){
-                case 1:
-                case 2:
-                    var ans_id=Gen_id(state["ans_list"])
-                    state["ans_list"]=state["ans_list"].concat(Ans_data_list({id:ans_id, rootid:action.rootid})[0])
-                    if(action.temid===2){
-                        var cho_id=Gen_id(state["choice_list"])
-                        state["choice_list"]=state["choice_list"].concat(Ans_data_list({id:cho_id, ansid:action.ansid, rootid:action.rootid})[1])
-                    }
-                    break
-                case 3:
-                case 4:
-                    break
-                case 5:
-                    //var ans_id=Gen_id(state["ans_list"])
-                    //state["ans_list"]=state["ans_list"].concat(Ans_data_list({id:ans_id, rootid:action.rootid})[2])
-                    break
-            }
             break
         case "del_ques": //제작자 질문 삭제
             state["ques_list"]=state["ques_list"].filter(t=>t.id!==action.id)

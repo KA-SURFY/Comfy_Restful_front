@@ -30,6 +30,7 @@ export function Multi(props){
                 </div>
             }
             <div className={style.column_container}>
+                <p className={style.text}>문항 목록</p>
                 <ItemList
                     rootid={data.rootid}
                     mode={data.mode}
@@ -47,6 +48,7 @@ export function Multi(props){
             </div>
             {
                 props.type==="grid" && data.mode===1 && <div className={style.column_container}>
+                    <p className={style.text}>선택지 목록</p>
                     <ItemList
                         rootid={data.rootid}
                         mode={data.mode}
