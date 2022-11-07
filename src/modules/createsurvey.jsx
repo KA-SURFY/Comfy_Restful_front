@@ -12,8 +12,8 @@ function add_ques(props){
 function init_survey(){
     return {
         "serverload":false,
-        "endtime":"",
-        "starttime":"",
+        "end":"",
+        "start":"",
         "share_modal":false,
         "ques_list":[],
         "ans_list":[],
@@ -85,9 +85,6 @@ export default function createsurvey(state=init_survey(), action){
                 "serverload":true,
                 "share_modal":false,
             }
-            break
-        case "endtime": //제작자 마감기한 설정
-            state["endtime"]=action.value
             break
         case "edit_satis": //피설문자 만족도 입력
             state["satis"]=action.value
@@ -195,8 +192,8 @@ export default function createsurvey(state=init_survey(), action){
         case "share_modal":
         case "intro0":
         case "intro1":
-        case "endtime":
-        case "starttime":
+        case "end":
+        case "start":
             state[action.type]=action.value
     }
     result = {

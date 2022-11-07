@@ -123,8 +123,8 @@ function Share_modal() {
     function share_url(){
         const memberid=localStorage.getItem('memberId');
         //editSurvey/1/a@gmail.com //createSurvey/a@gmail.com
-        survey_data["starttime"]=dateFns.format(startDate, "yyyy-MM-dd")
-        survey_data["endtime"]=dateFns.format(endDate ? endDate : startDate, "yyyy-MM-dd")
+        survey_data["start"]=dateFns.format(startDate, "yyyy-MM-dd")
+        survey_data["end"]=dateFns.format(endDate ? endDate : startDate, "yyyy-MM-dd")
         
         console.log(survey_data)
         CreateSurveyService.saveSurvey(loc,memberid,survey_data).then(response=>{
@@ -272,7 +272,7 @@ function CreateSurveySend() {
                 title="임시저장"
                 onClick={()=>{
                     console.log(state)
-                    state["endtime"]="not"
+                    state["end"]="not"
                     setDisabled(true)
                     CreateSurveyService.saveSurvey(loc,memberid,state).then(response=>{
                         if(response.data.isSuccess || response.data.isSuccess===undefined){
