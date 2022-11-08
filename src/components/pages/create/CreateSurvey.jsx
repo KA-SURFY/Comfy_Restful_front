@@ -126,16 +126,12 @@ function Share_modal() {
         survey_data["start"]=dateFns.format(startDate, "yyyy-MM-dd")
         survey_data["end"]=dateFns.format(endDate ? endDate : startDate, "yyyy-MM-dd")
         
-        console.log(survey_data)
         CreateSurveyService.saveSurvey(loc,memberid,survey_data).then(response=>{
             if(response.data.result){
                 setId(response.data.result)
                 setShare(true)
                 const surveyId=response.data.result;
                 postSurveyThumbnail(surveyId);
-            }
-            else{
-                console.log(response.data)
             }
         })
     }
@@ -240,8 +236,23 @@ function Share_modal() {
                                             type="button"
                                             className="inline-flex justify-center rounded-md border border-transparent bg-blue-100 ml-2 px-4 py-2 text-sm font-medium text-blue-900 hover:bg-blue-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-2"
                                             onClick={()=>{
-                                                navigator.clipboard.writeText(CreateSurveyService.shareSurvey(Id));
-                                                setCopy(true)
+                                                try{
+                                                    navigator.clipboard.writeText(CreateSurveyService.shareSurvey(Id));
+                                                }
+                                                catch(e){
+                                                    const textarea = document.createElement("textarea");
+                                                    textarea.value = CreateSurveyService.shareSurvey(Id);
+                                                    textarea.style.top = 0;
+                                                    textarea.style.left = 0;
+                                                    textarea.style.position = "fixed";
+    
+                                                    document.body.appendChild(textarea);
+                                                    textarea.focus();
+                                                    textarea.select();
+                                                    document.execCommand("copy");
+                                                    document.body.removeChild(textarea);
+                                                    setCopy(true)
+                                                }
                                             }}
                                         >
                                             복사
