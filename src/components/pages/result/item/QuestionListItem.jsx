@@ -4,6 +4,7 @@ import { ResponsivePie } from '@nivo/pie'
 import { ResponsiveBar } from '@nivo/bar'
 import axios from 'axios';
 import SurveyService from '../../../../services/ResultService';
+import * as Sentry from "@sentry/react";
 
 function QuestionListItem(props) {
     const question = props.questions;
@@ -33,12 +34,14 @@ function QuestionListItem(props) {
                 // array.push(<div className='mb-2 text-xl'>{question.answer[i].essay.contents}</div>)
                 essay.push(question.answer[i].essay.contents)
             }
-            axios.post('http://210.109.62.25:5000/react_to_flask',{
+            axios.post('http://localhost:5000/react_to_flask',{
             essay
             }).then(function(response){
                 console.log(response.data)
                 setData(response.data)
-            })
+            }).catch(function(e){
+                Sentry.captureException(e);
+            });
         }
     }, [question])
     

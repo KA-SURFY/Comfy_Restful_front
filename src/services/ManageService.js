@@ -1,6 +1,8 @@
 import axios from 'axios';
 import { renew_accessToken,initialize } from '../modules/member';
-const MANAGESURVEY_API_BASE_URL = "http://210.109.62.25:8080";
+import * as Sentry from "@sentry/react";
+
+const MANAGESURVEY_API_BASE_URL = `${process.env.REACT_APP_API_URL}`;
 
 const accessToken=localStorage.getItem('accessToken');
 const memberId=localStorage.getItem('memberId');
@@ -13,7 +15,9 @@ const config={
 class ManageSurveyService {
     
     getSurveys(){
-        const response=axios.get(MANAGESURVEY_API_BASE_URL+"/surveys",{headers:config});
+        const response=axios.get(MANAGESURVEY_API_BASE_URL+"/surveys",{headers:config}).catch(function(e){
+            Sentry.captureException(e);
+        });
         if(response.data.code===2002){
             return 100;
         }
@@ -28,7 +32,9 @@ class ManageSurveyService {
         console.log('[updateSurvey] - memberId',memberId);
         console.log('[updateSurvey] - accessToken',accessToken);
         console.log('[updateSurvey] - refreshToken',refreshToken);
-        const response=axios.patch(`/survey/${surveyId}`)
+        const response=axios.patch(`/survey/${surveyId}`).catch(function(e){
+            Sentry.captureException(e);
+        });
         // if(response.data.code===2002){
         //     return 100;
         // }
@@ -39,7 +45,9 @@ class ManageSurveyService {
     }
 
     updateSurvey2(surveyId){
-        const response=axios.patch(MANAGESURVEY_API_BASE_URL+"/survey" + '/' + surveyId,{headers:{withCredentials: true,'Access-Control-Allow-Origin':'*','ACCESS_TOKEN':`${accessToken}`,'REFRESH_TOKEN':`${refreshToken}`}});
+        const response=axios.patch(MANAGESURVEY_API_BASE_URL+"/survey" + '/' + surveyId,{headers:{withCredentials: true,'Access-Control-Allow-Origin':'*','ACCESS_TOKEN':`${accessToken}`,'REFRESH_TOKEN':`${refreshToken}`}}).catch(function(e){
+            Sentry.captureException(e);
+        });
         // if(response.data.code===2002){
         //     return 100;
         // }
@@ -50,7 +58,9 @@ class ManageSurveyService {
 
     getSurveyById(memberId,accessToken,refreshToken){
         console.log('manage survey service - memberId',memberId);
-        const response=axios.get(`/surveys/${memberId}`,{headers:config})
+        const response=axios.get(`/surveys/${memberId}`,{headers:config}).catch(function(e){
+            Sentry.captureException(e);
+        });
         if(response.data.code===2002){
             return 100;
         }
@@ -61,12 +71,16 @@ class ManageSurveyService {
     }
 
     getSurveyByStatus(status){
-        return axios.get(MANAGESURVEY_API_BASE_URL+"/surveys" + '/' + status+'/'+memberId,{headers:config});
+        return axios.get(MANAGESURVEY_API_BASE_URL+"/surveys" + '/' + status+'/'+memberId,{headers:config}).catch(function(e){
+            Sentry.captureException(e);
+        });
     }
 
     deleteSurvey(surveyId){
         console.log("delete")
-        const response=axios.delete(`${MANAGESURVEY_API_BASE_URL}/survey/${surveyId}/${memberId}`);      
+        const response=axios.delete(`${MANAGESURVEY_API_BASE_URL}/survey/${surveyId}/${memberId}`).catch(function(e){
+            Sentry.captureException(e);
+        });   
         return response;
     }
 }

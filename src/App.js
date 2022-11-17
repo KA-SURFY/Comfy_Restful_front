@@ -14,14 +14,9 @@ import TemporarySurvey from './components/pages/management/TemporarySurvey';
 import ResultSurvey from './components/pages/result/ResultSurvey';
 import React from 'react';
 import RespondentSurvey, { RespondentClose, RespondentComplete, RespondentNotOpen } from './components/pages/create/RespondentSurvey';
-
-
-
-
-
-
 import Header from './components/common/Header';
 import Footer from './components/common/Footer';
+import CreateSurveyTemplates from './components/pages/create/CreateSurveyTemplates';
 
 import {
   BrowserRouter,
@@ -34,10 +29,14 @@ export const react_domain="http://localhost:3000"//http://172.16.3.121 // localh
 export const share_domain="http://210.109.62.83"
 
 function App() {
+  console.warn = console.error = () => {};
+  
+  
   return (
      //<Provider store={store}>
      <>
       <Header />
+      <h1> {process.env.REACT_APP_API_URL}</h1>
       <div className='min-h-screen'>
         <BrowserRouter>
             
@@ -56,7 +55,9 @@ function App() {
                       <Route path="manage" element={<ManageSurvey />} />
                       <Route path="temporary" element={<TemporarySurvey />}/>
                       <Route path="survey" element={<CreateSurvey />} />
-                      <Route path="survey/:surveyId" element={<CreateSurvey load={"yes"}/>} />
+                      <Route path="comfysurvey" element={<CreateSurveyTemplates />} />
+                      {/* <Route path="survey" element={<CreateSurvey />} />
+                      <Route path="survey/:surveyId" element={<CreateSurvey load={"yes"}/>} /> */}
                       <Route path="surveyshared" element={<SurveyShared />} />
                       <Route path="/resultSurvey/:surveyId" element={<ResultSurvey />}/>
                       <Route path="/createsurvey" element={<CreateSurvey/>} />

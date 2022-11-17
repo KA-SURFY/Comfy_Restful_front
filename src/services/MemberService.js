@@ -1,10 +1,11 @@
 import axios from 'axios';
 import { logoutMember,initialize,renew_accessToken } from '../modules/member';
+import * as Sentry from "@sentry/react";
 
 // 구글 로그인
 export async function login(idToken){
     console.log('idToken',idToken);
-    const response=await axios.get(`http://210.109.62.25:8080/login/google/${idToken}`).then((response)=>{
+    const response=await axios.get(`${process.env.REACT_APP_API_URL}/login/google/${idToken}`).then((response)=>{
         console.log(response.data.result);
         if(response.data.code===2002){
             localStorage.clear();
@@ -16,7 +17,9 @@ export async function login(idToken){
             localStorage.setItem('email',response.data.result.email);
             localStorage.setItem('name',response.data.result.memberName);
         }
-    })
+    }).catch(function(e){
+        Sentry.captureException(e);
+    });
 
     
 }
@@ -25,7 +28,9 @@ export async function login(idToken){
 export async function logout(){
     const memberId=localStorage.getItem('memberId');
 
-    const response=axios.delete(`http://210.109.62.25:8080/logout/${localStorage.getItem('memberId')}`);
+    const response=axios.delete(`${process.env.REACT_APP_API_URL}/logout/${localStorage.getItem('memberId')}`).catch(function(e){
+        Sentry.captureException(e);
+    });
     console.log('logout response',response);
     
     return response;

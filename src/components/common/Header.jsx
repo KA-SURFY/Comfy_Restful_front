@@ -34,7 +34,7 @@ const solutions = [
     {
         name: 'Comfy 설문지 제작',
         description: "Commfy 템플릿으로 설문을 제작합니다.",
-        href: '#',
+        href: '/comfysurvey',
         icon: Squares2X2Icon,
     }
 ]
@@ -58,8 +58,8 @@ const resources = [
     }
 ]
 
-// const clientId="487333198384-nh6ucotf0f9djvv3u6oemopui89d8p7k.apps.googleusercontent.com";
-const clientId="150579669124-iuljf351licgh2lg7s35t1fcn9ct6k2h.apps.googleusercontent.com";
+const clientId="487333198384-nh6ucotf0f9djvv3u6oemopui89d8p7k.apps.googleusercontent.com";
+//const clientId="150579669124-iuljf351licgh2lg7s35t1fcn9ct6k2h.apps.googleusercontent.com";
 
 
 

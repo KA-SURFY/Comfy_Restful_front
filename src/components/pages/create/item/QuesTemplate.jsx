@@ -30,7 +30,7 @@ export function Multi(props){
                 </div>
             }
             <div className={style.column_container}>
-                <p className={style.text}>문항 목록</p>
+                {data.mode===1 &&<p className={style.text}>문항 목록</p>}
                 <ItemList
                     rootid={data.rootid}
                     mode={data.mode}
