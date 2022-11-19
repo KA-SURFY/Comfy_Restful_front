@@ -12,6 +12,7 @@ import rootReducer from './modules';
 import * as Sentry from "@sentry/react";
 import { Integrations } from "@sentry/tracing";
 
+console.warn = console.error = () => {};
 if (process.env.NODE_ENV === "production") {
   console.log = function no_console() {};
   console.warn = function no_console() {};

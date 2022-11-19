@@ -29,14 +29,11 @@ export const react_domain="http://localhost:3000"//http://172.16.3.121 // localh
 export const share_domain="http://210.109.62.83"
 
 function App() {
-  console.warn = console.error = () => {};
-  
-  
   return (
      //<Provider store={store}>
      <>
       <Header />
-      <h1> {process.env.REACT_APP_API_URL}</h1>
+      <h1> {process.env.NODE_ENV}</h1>
       <div className='min-h-screen'>
         <BrowserRouter>
             
