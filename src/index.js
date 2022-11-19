@@ -12,25 +12,21 @@ import rootReducer from './modules';
 import * as Sentry from "@sentry/react";
 import { Integrations } from "@sentry/tracing";
 
-console.warn = console.error = () => {};
 if (process.env.NODE_ENV === "production") {
   console.log = function no_console() {};
   console.warn = function no_console() {};
-  console.error = () => {};
+  console.error = function no_console(){};
 }
 if (process.env.NODE_ENV === "development") {
-  console.log = () => {}
-  console.error = () => {}
-  console.debug = () => {}
+  console.log = () => {};
+  console.error = () => {};
+  console.debug = () => {};
 }
+console.warn = function () {};
 
 Sentry.init({
   // 모든환경에 설정할 경우
-  dsn: "https://3221303bebea4051b86c9ae110da7df5@o4504168621604864.ingest.sentry.io/4504168751169536",
-  
-  // dsn: process.env.NODE_ENV === "production"
-  //     ? "https://3221303bebea4051b86c9ae110da7df5@o4504168621604864.ingest.sentry.io/4504168751169536"
-  //     : false, // production환경만 설정할 경우
+  dsn: "https://3221303bebea4051b86c9ae110da7df5@o4504168621604864.ingest.sentry.io/4504168751169536", 
   integrations: [new Integrations.BrowserTracing()],
   environment: process.env.NODE_ENV,
   tracesSampleRate: 1.0,
