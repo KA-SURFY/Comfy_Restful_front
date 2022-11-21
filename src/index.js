@@ -17,12 +17,6 @@ if (process.env.NODE_ENV === "production") {
   console.warn = function no_console() {};
   console.error = function no_console(){};
 }
-if (process.env.NODE_ENV === "development") {
-  console.log = () => {};
-  console.error = () => {};
-  console.debug = () => {};
-}
-console.warn = function () {};
 
 Sentry.init({
   // 모든환경에 설정할 경우

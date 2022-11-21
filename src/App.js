@@ -33,6 +33,7 @@ function App() {
      //<Provider store={store}>
      <>
       <Header />
+      {/* <h1>{process.env.NODE_ENV}</h1> */}
       <div className='min-h-screen'>
         <BrowserRouter>
             
