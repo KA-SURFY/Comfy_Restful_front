@@ -1,5 +1,5 @@
 
-# MSA_Back
+# Front
 🤩 가천대학교 카카오 아카데미 Surfy 팀의 Frontend 리포지토리입니다.
 
 <h1 align="middle">Comfy</h1>
